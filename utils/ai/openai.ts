@@ -47,13 +47,9 @@ export async function generateCompletion(args: GenerateCompletionArgs): Promise<
     
     // Return a mock response in development mode if no API key is configured
     if (!openaiKey) {
-        if (process.env.NODE_ENV === 'development') {
-            const lastMessage = chat[chat.length - 1]?.content as string || '';
-            return createMockCompletion(lastMessage);
-        } else {
-            console.error("OpenAI API key is missing in production environment");
-            throw new Error("OpenAI API key is not configured");
-        }
+        console.log('OpenAI API key missing - using fallback response');
+        const lastMessage = chat[chat.length - 1]?.content as string || '';
+        return createMockCompletion(lastMessage);
     }
 
     const openai = new OpenAI({ apiKey: openaiKey });

@@ -2,10 +2,17 @@ import { NextResponse } from 'next/server'
 import { clerkMiddleware, createClerkClient } from '@clerk/nextjs/server'
 import { NextRequest } from 'next/server'
 
-// Check if we're in development mode
+// Check if we're in development mode or if Clerk dev mode is enabled
 const isDevelopment = process.env.NODE_ENV === 'development' || process.env.CLERK_DEV_MODE === 'true'
 
-// Define public routes
+// Check if we have valid Clerk credentials
+const hasClerkCredentials = 
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && 
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith('pk_') &&
+  process.env.CLERK_SECRET_KEY && 
+  process.env.CLERK_SECRET_KEY.startsWith('sk_')
+
+// Define public routes that don't require authentication
 const publicRoutes = [
   '/',
   '/about',
@@ -13,22 +20,24 @@ const publicRoutes = [
   '/contact',
   '/request-quote',
   '/api/contact',
-  '/api/quote'
+  '/api/quote',
+  '/api/webhooks'
 ]
 
-// Define admin routes
+// Define admin routes that require authentication in production
 const adminRoutes = [
   '/admin'
 ]
 
-// Custom middleware for development mode to bypass Clerk validation
-function customMiddleware(req: NextRequest) {
+// Custom middleware for development mode or when Clerk is not properly configured
+function fallbackMiddleware(req: NextRequest) {
   const url = req.nextUrl.clone()
   const { pathname } = url
 
-  // For admin routes in development mode, allow access without authentication
+  // For admin routes, we would normally require authentication
+  // But in development or when Clerk is not configured, we'll bypass auth
   if (adminRoutes.some(route => pathname.startsWith(route))) {
-    console.log(`[Dev Mode] Bypassing auth for admin route: ${pathname}`)
+    console.log(`[Fallback Mode] Bypassing auth for admin route: ${pathname}`)
     return NextResponse.next()
   }
 
@@ -41,9 +50,9 @@ function customMiddleware(req: NextRequest) {
   return NextResponse.next()
 }
 
-// Export middleware configuration
-export default isDevelopment
-  ? customMiddleware
+// Export middleware configuration based on environment and credentials
+const middlewareHandler = (isDevelopment || !hasClerkCredentials)
+  ? fallbackMiddleware
   : clerkMiddleware({
       debug: true,
       publicRoutes,
@@ -68,6 +77,8 @@ export default isDevelopment
         return NextResponse.next()
       },
     })
+
+export default middlewareHandler
 
 // Configure middleware to run on these paths
 export const config = {

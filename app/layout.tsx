@@ -75,9 +75,9 @@ export const metadata: Metadata = {
 // Check if we have valid Clerk credentials
 const hasClerkCredentials = 
   process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && 
-  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY !== 'your_clerk_publishable_key' &&
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith('pk_') &&
   process.env.CLERK_SECRET_KEY && 
-  process.env.CLERK_SECRET_KEY !== 'your_clerk_secret_key'
+  process.env.CLERK_SECRET_KEY.startsWith('sk_')
 
 // Check if we're in development mode
 const isDevelopment = process.env.NODE_ENV === 'development' || process.env.CLERK_DEV_MODE === 'true'
