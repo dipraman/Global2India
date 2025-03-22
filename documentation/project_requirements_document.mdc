@@ -1,0 +1,127 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Global2India Website - Project Requirements Document
+
+This document outlines the requirements for the Global2India Website project. The website is designed to serve potential customers and businesses seeking reliable forwarding services from international locations to India. At its core, the site will provide clear, accessible information about the company’s services and enable users to request quotes, track orders, and easily contact the company. The design emphasizes a clean, modern, and professional appearance to build trust and encourage engagement.
+
+The website is being built to simplify the process of inquiring about and managing forwarding services. It aims to provide a smooth and intuitive user experience with a clear layout, fast response times, and robust backend support. Key objectives include real-time order tracking, an easy-to-use Request a Quote form with dynamic rate calculation, and an admin panel that allows for efficient management of customer inquiries, service data, and AWB tracking details. Success will be measured by improved user engagement, increased quote requests, and overall customer satisfaction.
+
+## In-Scope vs. Out-of-Scope
+
+**In-Scope:**
+
+*   **Home Page:** A dynamic hero section with a welcoming banner and multiple clickable promotional banners; clear introduction of Global2India with a prominent call-to-action (e.g., "Request a Quote").
+*   **About Us:** Brief company description, mission, and core values to build trust.
+*   **Services:** Service cards for each offering (International Courier, Parcel Delivery, Medicine Delivery, Warehousing & Distribution, Baggage Services, Cargo Services) with brief descriptions, images/icons, and links to detailed pages.
+*   **Request a Quote:** A user-friendly form that collects details (Name, Email, Phone, HSN Code, Weight, Origin Country/pincode, Destination Country/pincode) and calculates a tentative rate using weight × 500, with an option for the admin to override the rate.
+*   **Contact Us:** A contact form for inquiries, integrated Google Maps showing the company’s office location, and links to social media and customer service details.
+*   **Footer:** A well-organized footer with sub-menus for About Us, Quick Links, Services, and Reach Us (contact details).
+*   **Admin Panel:** Secure backend panel for managing rate changes, customer inquiries, service data updates, and AWB tracking.
+*   **Order Tracking System:** A guest-based (with an optional registration for enhanced tracking) order tracking feature using unique tracking numbers.
+
+**Out-of-Scope:**
+
+*   **Advanced Customer Account Features:** While basic account functionalities for order history and tracking are suggested as an optional enhancement, the initial version can remain primarily guest-based.
+*   **Additional Pricing Factors:** The initial rate calculation is fixed as weight × 500. Future factors such as package dimensions, delivery speed, or seasonal pricing variations are not included in the first release.
+*   **Extensive Analytics/Reporting:** The first version will not include deep analytics or detailed reporting features beyond basic administrative functions.
+*   **Complex Third-Party Integrations:** Additional email notification systems (e.g., SendGrid, Mailgun) and real-time tracking API integrations are planned for future phases as enhancements.
+
+## User Flow
+
+A new visitor lands on the Global2India website and is immediately greeted by a dynamic hero section on the Home Page, featuring a large banner that communicates the company’s purpose. The header displays the company logo in the top left and a clear navigation menu (Home, About Us, Services, Request a Quote, Contact Us). The visitor can click on one of the promotional banners or directly use the “Request a Quote” button to explore the website further. This intuitive approach helps guide the visitor quickly to the information they need while reinforcing the company’s global reach and reliability.
+
+Once a user decides to interact further, they navigate to the About Us and Services pages for more detailed information about the company and its offerings. If they wish to get a quote, they are taken to the Request a Quote form where they input their details and see a dynamically calculated rate. Guests can also use the order tracking feature with their unique Air Waybill number for real-time updates, or opt into a simple customer account for viewing order history. Finally, the Contact Us page offers a straightforward form alongside a Google Maps integration, ensuring any inquiries are easily and directly addressed.
+
+## Core Features
+
+*   **Dynamic Home Page:**\
+    • Hero section with a welcoming banner\
+    • 3-4 clickable promotional banners\
+    • Prominent “Request a Quote” call-to-action button
+*   **About Us Page:**\
+    • Company mission, core values, and vision\
+    • Concise narrative to build credibility
+*   **Services Section:**\
+    • Service cards for International Courier, Parcel Delivery, Medicine Delivery, Warehousing & Distribution, Baggage, and Cargo Services\
+    • Each card includes a brief description, relevant image/icon, and a clickable link for more details
+*   **Request a Quote Form:**\
+    • Fields: Name, Email, Phone, HSN Code, Weight, Origin Country (dropdown), Origin Pincode, Destination Country (dropdown), Destination Pincode\
+    • Dynamic rate calculation using weight × 500 with flexibility for admin rate adjustments
+*   **Contact Us Page:**\
+    • Inquiry contact form\
+    • Integrated Google Maps showing the company’s office location\
+    • Social media links and customer service details
+*   **Footer Navigation:**\
+    • Four sub-menus: About Us, Quick Links, Services, and Reach Us (contact details)
+*   **Admin Panel:**\
+    • Secure authentication (OAuth2 or JWT)\
+    • Manage rate changes, customer inquiries, service data updates, and AWB tracking
+*   **Order Tracking System:**\
+    • Guest-based tracking via unique Air Waybill number\
+    • Optional basic customer account for registered users to view order history
+
+## Tech Stack & Tools
+
+*   **Frontend Framework:**\
+    • Next.js for server-side rendering and enhanced performance\
+    • Tailwind CSS for styling and a responsive, modern design\
+    • Typescript for a robust, statically-typed codebase\
+    • Shadcn UI for pre-built, accessible UI components
+*   **Backend & Storage:**\
+    • Supabase for database management, secure data handling, and real-time updates\
+    • Optionally Node.js or a Python framework (Flask/Django) could be used based on functionality needs, though integration with Next.js is prioritized
+*   **Authentication & User Management:**\
+    • Clerk Auth for secure admin and, optionally, user authentication\
+    • OAuth2 or JWT-based methods for the admin panel
+*   **Integrations & APIs:**\
+    • Google Maps API for embedding an interactive map on the Contact Us page\
+    • Open AI and Claude 3.7 Sonnet for any potential AI-powered functionalities in the future\
+    • Future integrations like SendGrid or Mailgun for email notifications
+*   **Developer Tools:**\
+    • Cursor IDE for AI-powered coding assistance and real-time suggestions during development
+
+## Non-Functional Requirements
+
+*   **Performance:**\
+    • Fast load times across all pages, with responsive web design optimized for desktop, tablet, and mobile devices\
+    • Efficient dynamic content update on the Quote Request form and order tracking
+*   **Security:**\
+    • Use of environment variables to secure sensitive data\
+    • Implementation of row-level security in Supabase\
+    • Secure authentication and data encryption at rest and in transit
+*   **Accessibility & SEO:**\
+    • Adhere to WCAG 2.0 standards for accessibility (use of ARIA roles, clear heading hierarchies, alt texts for images)\
+    • Optimize meta tags, descriptions, and structured data for improved SEO\
+    • Fast and mobile-optimized web experience
+*   **Scalability:**\
+    • Modular code structure and separation of concerns to facilitate future enhancements\
+    • Flexibility in backend design to easily incorporate additional pricing factors and API integrations
+
+## Constraints & Assumptions
+
+*   **Branding:**\
+    • In the absence of specific branding guidelines, a professional blue and grey color palette will be used with common fonts like Arial or Helvetica until official guidelines are provided.
+*   **Rate Calculation Flexibility:**\
+    • Initial rate calculation is defined as weight × 500, with the system designed to allow additional factors in the future.
+*   **Third-Party Dependencies:**\
+    • Dependence on external APIs such as Google Maps for location features and Supabase for database management\
+    • Availability of AI models like Claude 3.7 Sonnet and Open AI for any advanced functionalities
+*   **Administrative Operations:**\
+    • The admin panel will handle a range of functions from rate updates to AWB tracking, assuming secure authentication mechanisms are reliably implemented.
+*   **Guest-Based Interactions:**\
+    • The website will remain primarily guest-based with optional customer accounts for order tracking to maintain a simple user experience.
+
+## Known Issues & Potential Pitfalls
+
+*   **API Rate Limits & External Dependencies:** • Potential rate limiting of external APIs such as Google Maps or future tracking integrations could impact data load times. • Dependencies on third-party services require careful monitoring to ensure continuous service availability.
+*   **Dynamic Rate Calculation:** • The fixed rate calculation (weight × 500) might need refinement when additional pricing factors are introduced. Build the function with flexible parameters to adjust future needs.
+*   **Admin Panel Security:** • Protecting the admin panel from unauthorized access is critical. Implement robust authentication (OAuth2/JWT) and consider regular security audits.
+*   **Database Optimization:** • Performance issues may arise with increasing data volumes (e.g., customer requests, AWB tracking). Ensure that the Supabase setup includes proper indexing and monitoring.
+*   **User Experience Challenges:** • Ensuring a responsive and intuitive design across devices can be challenging. Regular user testing and iterative design improvements are recommended to mitigate any usability issues.
+
+This PRD serves as the foundational guide for developing the Global2India Website. It covers all major aspects—from core functionality and user journey to technical specifics and potential challenges—ensuring that the subsequent technical documents (Tech Stack, Frontend Guidelines, Backend Structure, App Flow, File Structure, IDE rules, and Implementation Plan) can be generated without any ambiguity or missing details.

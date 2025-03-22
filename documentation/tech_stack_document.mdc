@@ -1,0 +1,109 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Global2India Tech Stack Document
+
+This document explains the technology choices made for the Global2India website project in plain language. Every technology is chosen for its specific role in offering a reliable, secure, and high-performing platform that connects international forwarding services with customers in India. Below is an outline of the selected technologies and how they contribute to the project's overall goals.
+
+## Frontend Technologies
+
+For the user interface that visitors interact with, we have chosen technologies that ensure a modern, responsive, and visually appealing design. The frontend is built with:
+
+- **Next.js**
+  - A powerful framework built on React that supports both client-side and server-side rendering, ensuring fast page loads and a great user experience.
+
+- **Tailwind CSS**
+  - A utility-first CSS framework that makes it easy to design a clean and professional layout with a modern feel. It keeps the styling process simple and efficient.
+
+- **Typescript**
+  - Enhances JavaScript by adding type safety. This means fewer bugs and smoother development, which ultimately contributes to a more reliable user interface.
+
+- **Shadcn UI**
+  - A collection of modular UI components that are customized to match the overall style of our website, ensuring consistency and ease of use.
+
+These tools work together to create an easy-to-navigate, responsive website that looks great on desktops, tablets, and mobile devices. The frontend’s overall goal is to deliver a seamless experience, ensuring users quickly find the information they need about Global2India's forwarding services.
+
+## Backend Technologies
+
+The backend is where all the data handling and business logic live, ensuring the website functions correctly behind the scenes. Our backend setup includes:
+
+- **Next.js Server Components (Node.js environment)**
+  - Next.js isn’t just for the frontend; it leverages Node.js for server-side operations. Our server components manage data requests and rendering, helping to keep operations fast and reliable.
+
+- **Supabase**
+  - A modern backend solution that handles database management, user data, and tracking details (like AWB tracking records). Supabase simplifies database interactions and implements strong security measures such as row-level security.
+
+- **Clerk Auth**
+  - An authentication service that helps secure both user and admin sessions. Clerk Auth supports methods like OAuth2 and JWT, ensuring that actions like modifying service rates or viewing sensitive data are well-protected.
+
+- **Open AI Integration**
+  - Although not a core requirement at present, Open AI capabilities can be integrated for features such as improved user assistance or processing inquiries intelligently in future updates.
+
+These backend components work in concert to manage requests, process form submissions, and allow admin functionalities such as rate adjustments and AWB tracking management.
+
+## Infrastructure and Deployment
+
+A robust infrastructure is essential to maintain the reliability and scalability of the website. Key infrastructure components include:
+
+- **Version Control with Git**
+  - We maintain our code in a Git repository (as seen in our CodeGuide Starter Pro repository on GitHub), which helps in tracking changes and collaborating efficiently.
+
+- **CI/CD Pipelines**
+  - Although not detailed explicitly, Continuous Integration and Continuous Deployment practices are adopted. This ensures that updates can be rolled out seamlessly and the website remains stable and secure.
+
+- **Hosting and Deployment Platforms**
+  - While specific hosting details may evolve, the project aligns with modern deployment practices. Leveraging platforms that integrate easily with Next.js ensures that deployment is quick and scalable.
+
+Together, these choices support a strong, scalable, and easily maintainable operational framework, guaranteeing that the website is available reliably to its users.
+
+## Third-Party Integrations
+
+To extend functionality without reinventing the wheel, we integrate several third-party services:
+
+- **Google Maps API**
+  - Integrates an interactive map on the Contact Us page, which accurately displays the office location for user convenience.
+
+- **Clerk Auth**
+  - Secures authentication processes for both users and administrators, ensuring safe access to sensitive parts of the website.
+
+- **Email Notification Services (SendGrid/Mailgun)**
+  - Future integration plans include using email services to notify users and administrators about inquiries, quote requests, and shipment tracking updates.
+
+- **Open AI**
+  - Although planned as a future addition, integrating Open AI support can enhance user interaction and potentially automate customer service responses.
+
+These integrations allow us to add advanced features easily and ensure that the website remains user-friendly and secure.
+
+## Security and Performance Considerations
+
+Security and performance are two of the most critical aspects of the Global2India website, and our tech stack is designed to address both:
+
+- **Security Measures**
+  - Use of environment variables to keep sensitive information secure.
+  - Implementation of row-level security in Supabase to ensure that data access is strictly controlled.
+  - Authentication with Clerk Auth (OAuth2 and JWT) safeguards both user and admin accounts.
+  - Data is encrypted both at rest and during transmission, protecting user information.
+  - Regular monitoring and input validation reduce vulnerabilities and prevent attacks such as SQL injections.
+
+- **Performance Optimizations**
+  - Next.js supports server-side rendering and static site generation, ensuring fast load times and efficient resource use.
+  - Tailwind CSS and Shadcn UI enable streamlined, efficient front-end designs that load quickly and adapt responsively across devices.
+  - The architecture leverages asynchronous processes on the backend to handle multiple requests without delay.
+
+These precautions and optimizations ensure that users have a secure, fast, and enjoyable experience on the site.
+
+## Conclusion and Overall Tech Stack Summary
+
+In summary, the Global2India website is built with a modern tech stack that aligns with the project’s goals and user needs. Here’s a quick recap of our technology choices:
+
+- **Frontend**: Next.js, Tailwind CSS, Typescript, Shadcn UI
+- **Backend**: Next.js server components (Node.js), Supabase for database management, Clerk Auth for secure authentication, with potential future enhancements using Open AI
+- **Infrastructure**: Git version control, CI/CD pipelines, and modern hosting/deployment practices ensuring scalability and maintainability
+- **Third-party Integrations**: Google Maps API, Email notification services (e.g., SendGrid/Mailgun), and potentially Open AI for advanced features
+- **Security & Performance**: Robust security practices (authentication, encryption, monitoring) and performance optimizations ensure a reliable and user-friendly platform
+
+These choices ensure that the website not only meets its immediate functional requirements but also stands ready for future enhancements. The combination of modern, scalable technologies and a rigorous approach to security and performance sets the Global2India website apart, providing a robust foundation for offering exceptional forwarding services to customers looking to connect globally with India.

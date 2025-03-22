@@ -1,0 +1,440 @@
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.logo-text {
+  font-family: Parkinsans, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    /* Main brand colors */
+    --primary: #0056b3; /* Main blue shade */
+    --primary-dark: #003d7a; /* Darker blue */
+    --primary-light: #4d8edb; /* Lighter blue */
+    --secondary: #34b4eb; /* Secondary blue (accent) */
+    --accent: #1e88e5; /* Accent blue */
+    
+    /* Background colors */
+    --background: #ffffff; /* White background */
+    --background-alt: #f5f9ff; /* Light blue background */
+    --background-muted: #e9f2ff; /* Muted blue background */
+    
+    /* Text colors */
+    --foreground: #1a1a2e; /* Nearly black text */
+    --foreground-muted: #4d4d60; /* Muted text */
+    --foreground-light: #6e6e85; /* Light/secondary text */
+    
+    /* Border colors */
+    --border: #d0e1f9; /* Light blue border */
+    --border-strong: #89b9f7; /* Stronger blue border */
+    
+    /* Status colors */
+    --success: #00a86b; /* Success green */
+    --warning: #ffa500; /* Warning orange */
+    --destructive: #e74c3c; /* Error/destructive red */
+    --destructive-foreground: #fff; /* Error/destructive text */
+    
+    /* Interactive elements */
+    --ring: #0056b3; /* Focus ring */
+    --input: #e9f2ff; /* Input background */
+    --card: #ffffff; /* Card background */
+    --card-foreground: #1a1a2e; /* Card text */
+    --popover: #ffffff; /* Popover background */
+    --popover-foreground: #1a1a2e; /* Popover text */
+    
+    /* Animations */
+    --active-scale: 0.95;
+    
+    /* Shadows */
+    --shadow-color: rgba(0, 86, 179, 0.1); /* Blue-tinted shadows */
+    --shadow-sm: 0 1px 2px var(--shadow-color);
+    --shadow: 0 4px 6px var(--shadow-color), 0 1px 3px var(--shadow-color);
+    --shadow-md: 0 6px 10px var(--shadow-color), 0 2px 4px var(--shadow-color);
+    --shadow-lg: 0 15px 25px var(--shadow-color), 0 5px 10px var(--shadow-color);
+    --shadow-xl: 0 20px 40px var(--shadow-color);
+    
+    /* Radius */
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    /* Main brand colors in dark mode */
+    --primary: #4d8edb; /* Lighter blue as primary */
+    --primary-dark: #0056b3; /* Main blue becomes dark */
+    --primary-light: #89b9f7; /* Even lighter blue */
+    --secondary: #34b4eb; /* Secondary blue unchanged */
+    --accent: #1e88e5; /* Accent blue unchanged */
+    
+    /* Background and foreground colors */
+    --background: #0a1929; /* Dark blue background */
+    --background-alt: #132f4c; /* Slightly lighter dark blue */
+    --background-muted: #1e3a5f; /* Muted dark blue */
+    
+    /* Text colors */
+    --foreground: #f8fafc; /* Nearly white text */
+    --foreground-muted: #cbd5e1; /* Muted text */
+    --foreground-light: #94a3b8; /* Light/secondary text */
+    
+    /* Border colors */
+    --border: #132f4c; /* Darker blue border */
+    --border-strong: #1e3a5f; /* Stronger blue border */
+    
+    /* Card and popover */
+    --card: #132f4c; /* Card background */
+    --card-foreground: #f8fafc; /* Card text */
+    --popover: #132f4c; /* Popover background */
+    --popover-foreground: #f8fafc; /* Popover text */
+    
+    /* Input */
+    --input: #1e3a5f; /* Input background */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Logo gradient */
+.logo-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Hero section gradient overlay */
+.hero-gradient-overlay {
+  background: linear-gradient(135deg, rgba(0, 86, 179, 0.85) 0%, rgba(52, 180, 235, 0.85) 100%);
+}
+
+/* Custom gradient backgrounds */
+.bg-blue-gradient {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+.bg-blue-subtle-gradient {
+  background: linear-gradient(135deg, var(--background) 0%, var(--background-alt) 100%);
+}
+
+.card-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Footer gradient */
+.footer-gradient {
+  background: linear-gradient(to right, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+/* Accent border */
+.accent-border {
+  border-left: 4px solid var(--accent);
+}
+
+/* Section divider */
+.section-divider {
+  height: 4px;
+  width: 80px;
+  background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
+  margin: 1rem 0;
+}
+
+/* Header styling */
+.transparent-header {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 86, 179, 0.1);
+}
+
+/* Custom button styles */
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 86, 179, 0.2);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--background-muted);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 86, 179, 0.1);
+}
+
+/* Custom icons with primary color */
+.icon-primary {
+  color: var(--primary);
+  transition: transform 0.3s ease;
+}
+
+.icon-primary:hover {
+  transform: translateY(-2px);
+}
+
+/* Service card styling */
+.service-card {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.service-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.service-card-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--background-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+/* Testimonial styling */
+.testimonial-card {
+  background: var(--background-alt);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin: 1rem;
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: "\201C";
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 4rem;
+  color: var(--primary-light);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+/* Custom box shadow utilities */
+.shadow-blue-sm {
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.shadow-blue {
+  box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.shadow-blue-lg {
+  box-shadow: 0 8px 16px var(--shadow-color);
+}
+
+/* Stats counter styling */
+.stats-container {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 3rem 0;
+  border-radius: var(--radius);
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1rem;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Call to action section */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  padding: 4rem 2rem;
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.cta-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.cta-description {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.cta-btn {
+  background: white;
+  color: var(--primary);
+  padding: 0.75rem 2rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Timeline styling */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  background-color: var(--primary-light);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+}
+
+.timeline-container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+.timeline-container::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: -10px;
+  background-color: var(--background);
+  border: 4px solid var(--primary);
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  left: 50%;
+}
+
+.left::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  border: medium solid var(--border);
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent var(--border);
+}
+
+.right::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 30px;
+  border: medium solid var(--border);
+  border-width: 10px 10px 10px 0;
+  border-color: transparent var(--border) transparent transparent;
+}
+
+.right::after {
+  left: -10px;
+}
+
+.timeline-content {
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Responsive media query for timeline */
+@media screen and (max-width: 768px) {
+  .timeline::after {
+    left: 31px;
+  }
+  
+  .timeline-container {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+  
+  .timeline-container::before {
+    left: 60px;
+    border: medium solid var(--border);
+    border-width: 10px 10px 10px 0;
+    border-color: transparent var(--border) transparent transparent;
+  }
+
+  .left::after, .right::after {
+    left: 15px;
+  }
+  
+  .right {
+    left: 0%;
+  }
+}

@@ -1,0 +1,94 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Global2India Frontend Guideline Document
+
+This document serves as a guide for building the Global2India website, a modern and professional platform designed to help potential customers and businesses access reliable international forwarding services to India. The guidelines below break down the architecture, design principles, styling, component structure, state management, routing, performance optimization, and testing practices that make up our frontend setup.
+
+## 1. Frontend Architecture
+
+Our website is built using a modern tech stack that includes Next.js, Tailwind CSS, and TypeScript. By leveraging Next.js, we take advantage of server-side rendering, static site generation, and file-based routing for improved performance and scalability. Tailwind CSS provides a utility-first approach to styling, while TypeScript ensures type safety and better code maintainability.
+
+We also use supporting libraries such as Shadcn UI for pre-designed, reusable components and Clerk Auth for secure user authentication. Supabase is our choice for database management, seamlessly integrated with the frontend to handle AWB tracking, customer data, and other operational details. This architecture is designed to grow with the business, ensuring that any future enhancements can be added smoothly.
+
+## 2. Design Principles
+
+Our frontend development is guided by clear design principles aimed at providing a clean, efficient, and accessible user experience. Key principles include:
+
+- **Usability:** The design emphasizes ease of navigation and clarity. Users can intuitively interact with clear call-to-action buttons such as "Request a Quote" and easily find information across pages.
+- **Accessibility:** We adhere to WCAG 2.0 standards. This means our pages are designed to be friendly to users with disabilities, including support for screen readers, proper contrast, and keyboard navigability.
+- **Responsiveness:** The website is crafted to provide a consistent experience on desktop, tablet, and mobile devices, ensuring that content adapts smoothly to different screen sizes.
+- **SEO Best Practices:** With clean code, keyword-rich content, well-organized headers, and meta tags built into each page, our site is optimized for search engines which helps users find Global2India easily.
+
+## 3. Styling and Theming
+
+We use Tailwind CSS as our primary framework for styling. This utility-first approach allows us to rapidly build custom designs without a lot of custom CSS. Here’s what you need to know about our styling approach:
+
+- **CSS Methodology:** Tailwind CSS is our choice due to its speed and efficiency. There’s no need for heavy class naming conventions as seen in BEM or SMACSS, which makes our styling cleaner and easier to maintain.
+- **Theming:** While we aim for a clean and professional design, we are using a modern flat style with hints of glassmorphism for a subtle, modern feel. Consistency is achieved through a standardized color palette and font selection.
+- **Color Palette:** We stick with professional blues and greys. For example:
+  - Primary Blue: #1E3A8A
+  - Secondary Grey: #4B5563
+  - Accent Light Blue: #3B82F6
+  - Background Light Grey: #F3F4F6
+  - White: #FFFFFF
+
+- **Fonts:** We use web-friendly fonts such as Arial or Helvetica. These choices ensure readability, a modern look, and go well with the overall design language. With Shadcn UI, you may also see styles similar to the default Inter font which is both modern and easy-to-read.
+
+## 4. Component Structure
+
+Our frontend follows a component-based architecture. Each UI element—from navigation menus and hero sections to service cards and forms—is built as a reusable component. This includes:
+
+- **Modular Organization:** Components are organized within a clear folder structure (e.g., components/ui for Shadcn-based components) so developers can locate and modify them easily.
+- **Reusability:** Smaller components are designed to be reused in different parts of the application, which not only speeds up development but also ensures design consistency across the site.
+- **Scalability:** With components encapsulating functionality and design details, the frontend can be scaled or modified without impacting unrelated parts of the system.
+
+## 5. State Management
+
+For managing state across the application, we primarily rely on React's native state management along with the Context API for global state needs. For more complex interactions, such as handling authentication states and managing form data, we use libraries that integrate seamlessly into the React ecosystem.
+
+Key points include:
+
+- **Local and Global States:** While local component state handles immediate UI feedback, the Context API facilitates sharing states like user authentication and real-time tracking data across multiple components.
+- **Simplified Data Flow:** This approach minimizes the need for heavy formalities like Redux unless absolutely necessary, making the codebase easier to understand and manage.
+
+## 6. Routing and Navigation
+
+We use Next.js’ built-in file-based routing to manage navigation throughout the site. Key details include:
+
+- **Navigation Structure:** The main header includes intuitive links: Home, About Us, Services, Request a Quote, and Contact Us, ensuring users can easily navigate through the website.
+- **Dynamic Routing:** The system supports client-side navigation for a fast and smooth user experience. This includes navigating between service detail pages and the admin panel for backend management.
+
+## 7. Performance Optimization
+
+To provide users with a fast and engaging experience, several performance measures are in place:
+
+- **Lazy Loading and Code Splitting:** Components and assets, especially images and service cards, are loaded only when needed. This keeps initial load times low and enhances perceived performance.
+- **Asset Optimization:** We take care to optimize images and static resources. This includes compressing files and using modern formats for a better balance of speed and quality.
+- **Efficient Rendering:** By using Next.js’ optimizations, such as static generation and server-side rendering, the website is both fast to load and SEO-friendly.
+
+## 8. Testing and Quality Assurance
+
+Ensuring that the website is robust and reliable is key. Our approach includes:
+
+- **Unit Testing:** Individual components are tested with tools like Jest to ensure they behave as expected.
+- **Integration Testing:** Components are tested together using frameworks like React Testing Library to verify that data flows and user interactions function correctly.
+- **End-to-End Testing:** Tools such as Cypress may be used to simulate real user interactions. This confirms that critical user journeys—from requesting a quote to tracking an order—are seamless.
+- **Continual Code Reviews:** Peer reviews and automated linting help maintain code quality and consistency throughout the project lifecycle.
+
+## 9. Conclusion and Overall Frontend Summary
+
+In summary, our frontend guidelines provide a clear roadmap for building the Global2India website. Here are the key takeaways:
+
+- A modern, scalable architecture built on Next.js, Tailwind CSS, and TypeScript ensures robust and maintainable code.
+- Design principles focus on usability, accessibility, and responsive design to serve both global and local users.
+- A consistent styling approach using Tailwind CSS and a professional color palette of blues and greys creates a clean and appealing aesthetic.
+- Component-based architecture and efficient state management streamline development and future enhancements.
+- Thoughtful routing, navigation, and performance optimization strategies ensure a fast, smooth, and engaging user experience.
+- Comprehensive testing and quality assurance methods ensure that every part of the frontend is reliable and meets today’s standards.
+
+With these guidelines, developers and designers can work together to build a frontend that not only meets but exceeds the needs of Global2India’s users, providing a trusted and professional experience at every touchpoint.

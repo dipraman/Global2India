@@ -1,0 +1,122 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+## Project Overview
+
+* **Type:** cursor_project_rules
+* **Description:** Global2India Website, a platform designed to offer international forwarding services to potential customers and businesses. The site features key sections including Home, About Us, Services, Request a Quote, Contact Us, and an informative Footer with multiple sub-menus to enhance user navigation.
+* **Primary Goal:** To build a user-friendly, SEO optimized, and secure website that streamlines the quote request process, order tracking, and service management for Global2India, while ensuring scalability and seamless integration with third-party services.
+
+## Project Structure
+
+### Framework-Specific Routing
+
+* **Directory Rules:**
+
+    * **Next.js 14 (App Router):** Uses the `app/[route]/page.tsx` convention for file-based routing with nested route folders. This ensures all routing is managed within the `app` directory and eliminates the use of the traditional `pages` directory.
+    * Example 1: "Next.js 14 (App Router)" → `app/[route]/page.tsx` conventions
+    * Example 2 (for comparison): "Next.js (Pages Router)" → `pages/[route].tsx` pattern (should not be mixed in this project)
+    * Example 3: "React Router 6" → `src/routes/` with `createBrowserRouter` (for reference in other projects)
+
+### Core Directories
+
+* **Versioned Structure:**
+
+    * **app:** Contains the root layout, global styles, and page entry points. 
+    * **app/api:** Houses API routes built with Next.js 14 Route Handlers (e.g., `app/api/webhooks/route.ts`).
+    * **components:** Contains modular and reusable UI components including Shadcn UI components and providers (e.g., Clerk client provider).
+    * **hooks:** Custom React hooks to encapsulate common logic (e.g., `use-mobile.tsx`, `use-toast.ts`).
+    * **lib:** Utility libraries and helper functions for shared logic.
+    * **types:** Definitions for TypeScript types ensuring consistency across the project.
+    * **utils:** Contains subdirectories for AI integrations, Stripe configurations, Supabase helpers, and more.
+
+### Key Files
+
+* **Stack-Versioned Patterns:**
+
+    * **app/layout.tsx:** Next.js 14 root layout setup ensuring consistent styling and structure across the site.
+    * **app/page.tsx:** The entry point for the home page, built according to Next.js 14 App Router conventions.
+    * **app/api/** files: Implement API routes using Route Handlers for backend operations.
+    * **components/providers/clerk-client-provider.tsx:** Key integration file for secure authentication using Clerk Auth.
+
+## Tech Stack Rules
+
+* **Version Enforcement:**
+
+    * **next@14:** App Router enforced with no usage of legacy methods like `getInitialProps`.
+    * **tailwindcss@latest:** Utilize utility-first CSS with a responsive, mobile-first design approach.
+    * **typescript@4.x:** Enforce strict type checking and comprehensive type definitions throughout the project.
+    * **supabase:** Implement row-level security, use environment variables for credentials, and ensure secure data management.
+    * **shadcn-ui:** Use pre-built, customizable components to maintain visual consistency and efficiency in development.
+    * **clerk-auth:** Implement secure authentication flows leveraging OAuth2 or JWT, with robust session management.
+    * **openai:** Integrate Open AI services with proper API key management and error handling using best practices.
+    * **google-maps-api:** Ensure optimal map integration by following responsive design guidelines and efficient API usage.
+
+## PRD Compliance
+
+* **Non-Negotiable:**
+
+    * "The website must reflect a professional and modern aesthetic, with a clean layout optimized for SEO and accessibility. It should seamlessly guide users through quote requests, service inquiries, and order tracking, all while allowing admin control over dynamic pricing and service data updates." (Derived from project requirements and design preferences)
+
+## App Flow Integration
+
+* **Stack-Aligned Flow:**
+
+    * Next.js 14 Auth Flow: For authentication, pages such as `app/auth/login/page.tsx` will leverage secure server actions integrated with Clerk Auth.
+    * Request a Quote: The form on the Request a Quote page will dynamically calculate rates (weight * 500) and allow admin adjustments, following server-driven logic.
+    * Order Tracking: A guest-based and optional account-based tracking system is integrated, ensuring real-time updates and seamless navigation.
+    * Contact Us: Integration with Google Maps API for accurate office location display and robust inquiry management.
+
+## Best Practices
+
+* **Next.js:**
+    * Utilize file-based routing strictly under the `app` directory.
+    * Leverage server components and dynamic imports for optimized performance.
+    * Ensure SEO optimization through meta tags, structured data, and fast loading times.
+
+* **Tailwind CSS:**
+    * Adopt a utility-first approach to build responsive, mobile-first interfaces.
+    * Customize the configuration to maintain a lean and efficient CSS bundle.
+    * Follow best practices for scalable and maintainable design.
+
+* **Typescript:**
+    * Enforce strict type checking across the codebase.
+    * Consistently use interfaces and types for robust maintainability.
+    * Leverage generics and advanced type features to reduce bugs and improve developer experience.
+
+* **Supabase:**
+    * Implement row-level security and restrict data access based on user roles.
+    * Use environment variables to secure sensitive credentials.
+    * Regularly audit and monitor database access for enhanced security.
+
+* **Shadcn UI:**
+    * Maintain consistency by using pre-built UI components.
+    * Customize components minimally to ensure uniformity in design.
+    * Follow accessibility standards in all component implementations.
+
+* **Clerk Auth:**
+    * Implement secure authentication by leveraging OAuth2 or JWT.
+    * Ensure robust session management and regular monitoring of authentication flows.
+    * Integrate seamless user experiences for both guest and registered users.
+
+* **Open AI:**
+    * Adhere to API best practices including proper error handling and rate limiting.
+    * Secure API keys using environment variables and ensure minimal exposure.
+    * Monitor usage patterns to optimize performance and scalability.
+
+* **Google Maps API:**
+    * Integrate maps responsively, ensuring they render correctly on all devices.
+    * Optimize API calls to improve loading times and reduce overhead.
+    * Comply with usage limits and billing configurations to avoid service interruptions.
+
+## Rules
+
+* Derive folder/file patterns directly from techStackDoc versions as provided in the starter kit.
+* If using Next.js 14 App Router: Enforce the use of the `app/` directory with nested route folders; do not mix with the `pages/` structure.
+* For Pages Router projects: Use a flat structure in `pages/*.tsx`.
+* Mirror this logic appropriately for React Router, SvelteKit, or other frameworks in different projects.
+* Never mix version patterns to maintain consistency and avoid routing conflicts.

@@ -1,0 +1,176 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Backend Structure Document
+
+This document provides a clear and straightforward explanation of the backend architecture, hosting solutions, and infrastructure components for the Global2India website. Whether you have a technical background or not, this guide breaks down all the moving parts in everyday language.
+
+## 1. Backend Architecture
+
+The overall backend setup is designed to be scalable, easy to maintain, and perform well as demands grow:
+
+- **Core Frameworks and Languages**:
+  - The backend can be built using either **Node.js** (ideal for asynchronous, event-driven operations) or **Python (Flask/Django)** for simplicity and clarity.
+  - A decision can be made based on team preference, though Node.js is often chosen when working with JavaScript-heavy frontends (like Next.js).
+
+- **Design Patterns**:
+  - Uses a modular structure to separate concerns (API routes, business logic, and data access layers).
+  - The admin panel, which lets administrators manage rates, customer inquiries, and AWB tracking, is separated from customer-facing endpoints.
+
+- **Scalability and Performance**:
+  - Supports horizontal scaling through modular API design.
+  - Non-blocking I/O (especially in Node.js) allows for real-time updates, like order tracking.
+
+## 2. Database Management
+
+The project uses Supabase as its database solution. The main aspects include:
+
+- **Technology**: Supabase powered by PostgreSQL.
+- **Data Classification**:
+  - **User Data**: Storing information such as name, email, and contact details.
+  - **Service Information**: Details for various services including Courier, Cargo, Parcel Delivery etc.
+  - **Inquiry and Quote Requests**: Form submissions from users containing package details, billing info, and rate calculations.
+  - **AWB (Air Waybill) Tracking**: Information required to track shipments, updated as packages move through logistics.
+
+- **Data Management Practices**:
+  - Use of environment variables to store sensitive data.
+  - Regular backups and adherence to data privacy policies.
+  - Use of Supabase's row-level security (RLS) to ensure that users can only access their own information.
+
+## 3. Database Schema
+
+For an SQL structure, here’s a human-readable overview and a simple SQL schema representation:
+
+- **Overview**:
+  - **Users Table**: Contains customer details such as full name, email, phone, and login credentials (if customer accounts are used).
+  - **Quote Requests Table**: Stores form submissions including name, email, phone, HSN code, weight, origin and destination details, and the calculated rate.
+  - **AWB Tracking Table**: Tracks packages with columns for shipment ID, current status, timestamps, and tracking numbers.
+  - **Admin Table**: Holds admin user credentials for login, and privileges to update rates and manage service data.
+
+- **Example SQL Schema (PostgreSQL)**:
+
+  -- Users Table
+  • users:
+    - id (Primary Key, auto-increment)
+    - full_name (Text)
+    - email (Text, unique)
+    - phone (Text)
+    - password_hash (Text, if account based login is implemented)
+
+  -- Quote Requests Table
+  • quote_requests:
+    - id (Primary Key, auto-increment)
+    - user_id (Foreign Key to users, optional)
+    - name (Text)
+    - email (Text)
+    - phone (Text)
+    - hsn_code (Text)
+    - weight (Numeric)
+    - origin_country (Text)
+    - origin_pincode (Text)
+    - destination_country (Text)
+    - destination_pincode (Text)
+    - calculated_rate (Numeric)
+    - created_at (Timestamp)
+
+  -- AWB Tracking Table
+  • awb_tracking:
+    - id (Primary Key, auto-increment)
+    - quote_request_id (Foreign Key to quote_requests)
+    - tracking_number (Text)
+    - current_status (Text)
+    - updated_at (Timestamp)
+
+  -- Admin Table
+  • admins:
+    - id (Primary Key, auto-increment)
+    - username (Text, unique)
+    - password_hash (Text)
+    - role (Text, e.g., 'admin')
+
+## 4. API Design and Endpoints
+
+The API is designed to be RESTful, meaning that every endpoint represents a specific function:
+
+- **Design Overview**:
+  - Clear endpoint patterns making it easy to understand what data is being accessed or modified.
+  - Use of standard HTTP methods such as GET for fetching data and POST for submitting data.
+
+- **Key Endpoints Include**:
+  - **/api/quote-request**: Handles POST requests for quote submissions, calculates rates, and stores quote requests.
+  - **/api/contact**: Receives general inquiries via the contact form and routes them to the admin email or database.
+  - **/api/tracking**: Provides GET endpoints that allow customers (or guest users) to check the status of their shipments using their Air Waybill number.
+  - **/api/admin/login**: Authenticates admin users using JWT or OAuth2 as specified.
+  - **/api/admin/update-rate**: Enables admin to update the pricing factor and other service details.
+
+## 5. Hosting Solutions
+
+The backend is hosted in a cloud-based environment to ensure high availability and scalability:
+
+- **Primary Providers and Technologies**:
+  - For the application built with Next.js, deployment is ideal on platforms such as **Vercel** for optimal performance and ease of integration.
+  - The database is hosted on **Supabase**, which is a cloud-hosted PostgreSQL solution with built-in features for scalability.
+
+- **Benefits**:
+  - **Reliability**: Cloud providers like Vercel and Supabase offer high uptime and managed services.
+  - **Scalability**: Easily scale resources in response to growing demands.
+  - **Cost-Effectiveness**: Pay-as-you-go pricing models help manage costs by aligning expenses with actual usage.
+
+## 6. Infrastructure Components
+
+Several infrastructure elements work together to improve performance and the overall user experience:
+
+- **Load Balancers**: Evenly distribute incoming requests to prevent any single server from being overwhelmed.
+- **Caching Mechanisms**: Utilize caching at various levels (e.g., server-side caching or CDN) to speed up content delivery, particularly for static assets.
+- **Content Delivery Networks (CDNs)**: Services such as Vercel’s built-in CDN or external ones like Cloudflare help deliver content quickly to users worldwide.
+- **Additional Tools**:
+  - **Environment Variables** are used to securely manage configuration and sensitive data.
+  - **Serverless Functions** for lightweight API endpoints that can scale quickly when needed.
+
+## 7. Security Measures
+
+Security is integrated at every stage of the backend:
+
+- **Authentication and Authorization**:
+  - Admin authentication via OAuth2 or JWT ensures only authorized personnel can update rates or service data.
+  - Optional user account features are secured using these authentication protocols.
+
+- **Data Encryption**:
+  - All sensitive data is kept safe with encryption both at rest (using Supabase’s built-in disk encryption) and during transmission using SSL/TLS.
+
+- **Data Privacy**:
+  - Implementation of Supabase’s Row-Level Security (RLS) prevents unauthorized access to user data.
+  - Routine audits and input validations help to minimize breaches and injection attacks.
+
+## 8. Monitoring and Maintenance
+
+To ensure the backend remains healthy and efficient over time:
+
+- **Monitoring Tools**:
+  - Use of logging and monitoring tools such as Sentry, Datadog, or built-in Vercel analytics to track errors and performance issues.
+  - Supabase also provides monitoring for database activity which helps in detecting unusual patterns.
+
+- **Maintenance Practices**:
+  - Regular updates to dependencies and underlying libraries.
+  - Scheduled backups and security audits to ensure consistency and secure handling of data.
+  - An admin dashboard to monitor real-time system status and manage any required refresh or recovery operations.
+
+## 9. Conclusion and Overall Backend Summary
+
+In summary, the backend of the Global2India website is built for performance, security, and adaptability:
+
+- **Architecture**: Employs a modular, scalable design using the preferred technology (Node.js or Python) that supports real-time order tracking and user interactions.
+- **Database**: Uses Supabase (PostgreSQL), ensuring structured, encrypted, and well-managed data handling.
+- **APIs**: Designed with RESTful principles to ensure clear, intuitive endpoints for both user cancellations and admin operations.
+- **Hosting and Infrastructure**: Leverages cloud leaders like Vercel and Supabase to achieve high reliability, rapid scaling, and global content delivery.
+- **Security and Monitoring**: Implements robust security mechanisms, encryption, and continuous monitoring to protect against data breaches and ensure operational transparency.
+
+This well-planned backend structure not only meets the project’s current needs but also lays the groundwork for future enhancements, such as advanced tracking and additional integrations, ensuring Global2India remains competitive and customer-focused.
+
+---
+
+This completes the backend structure document for Global2India. Every component has been geared towards a secure, maintainable, and performance-optimized system that aligns closely with the project goals and user expectations.

@@ -1,0 +1,181 @@
+---
+description: Apply these rules when making changes to the project
+globs:
+alwaysApply: true
+---
+
+Update this rule if user requested changes to the project requirement, etc.
+# Implementation plan
+
+Below is the step-by-step plan for implementing the Global2India Website. All instructions follow the core project documents including PRD, App Flow, Tech Stack, Frontend/Backend Guidelines, and the CodeGuide Starter Pro starter kit.
+
+## Phase 1: Environment Setup
+
+1.  **Clone Starter Kit Repository**
+
+    *   Action: Visit [CodeGuide Starter Pro](https://github.com/codeGuide-dev/codeguide-starter-pro) and click "Use Template" to create a new repo.
+    *   Reference: Starter Kit details in project document.
+
+2.  **Navigate to Project Directory**
+
+    *   Action: Open your terminal and change directory to the newly cloned repository.
+    *   File Location: Project root.
+
+3.  **Install Dependencies**
+
+    *   Action: Run `npm install` to install all dependencies. Ensure that Next.js is installed at version 14 as required.
+    *   Note: Next.js 14 is selected for optimal integration with current AI coding tools.
+    *   Reference: Tech Stack Document.
+
+4.  **Verify Environment Setup**
+
+    *   Action: Run `npm run dev` and check that the starter kit loads in your browser.
+    *   Validation: Confirm that the CodeGuide Starter Pro home page appears.
+    *   Reference: Cursor Project Rules.
+
+## Phase 2: Frontend Development
+
+1.  **Develop Home Page Layout**
+
+    *   Action: Update `app/page.tsx` to include a dynamic hero section with a welcoming banner that communicates Global2India's forwarding services.
+    *   Elements: Include 3-4 clickable banners for promotions and a prominent 'Request a Quote' CTA button.
+    *   Reference: PRD - Home Page; Outline - Home Page Layout.
+
+2.  **Implement About Us Page**
+
+    *   Action: Create a new file at `app/about/page.tsx`.
+    *   Content: Add a brief description of Global2India, its mission, and vision.
+    *   Reference: PRD - About Us; Outline - Discovering the Company.
+
+3.  **Create Services Page with Service Cards**
+
+    *   Action: Create `app/services/page.tsx`.
+    *   Content: Display cards for each service (International Courier, Parcel Delivery, Medicine Delivery, Warehousing & Distribution, Baggage Services, Cargo Services).
+    *   Each card should contain a brief description, an image/icon, and a link to a detailed service page.
+    *   Styling: Use Tailwind CSS and Shadcn UI components.
+    *   Reference: PRD - Services; Outline - Exploring Service Offerings.
+
+4.  **Develop Request a Quote Page with Form**
+
+    *   Action: Create a new page at `app/request-quote/page.tsx`.
+    *   Form Fields: Include Name, Email, Phone, HSN Code, Weight, Origin Country (dropdown), Origin Pincode, Destination Country (dropdown), Destination Pincode.
+    *   File: Optionally, separate the form component in `app/request-quote/QuoteForm.tsx`.
+    *   Reference: PRD - Request a Quote; Outline - Requesting a Quote.
+
+5.  **Integrate Rate Calculation Logic**
+
+    *   Action: Inside the Quote Request form component (`QuoteForm.tsx`), implement a rate calculation function that computes rate as (weight * 500) and provides an admin override option later.
+    *   Reference: PRD - Request a Quote; Outline - Quote Request Functionality.
+
+6.  **Design Contact Us Page with Google Maps**
+
+    *   Action: Create `app/contact/page.tsx`.
+    *   Content: Include a contact form and integrate Google Maps using the Google Maps API to display the company office location.
+    *   Reference: PRD - Contact Us; Outline - Reaching Out via Contact Us.
+
+7.  **Develop a Footer Component**
+
+    *   Action: Create a reusable Footer component at `components/Footer.tsx`.
+    *   Sections: Divide the footer into four sub-menus (About Us, Quick Links, Services Links, Reach Us) according to the specifications.
+    *   Reference: PRD - Footer; Outline - Navigating the Footer and Additional Links.
+
+8.  **Validate Frontend UI Components**
+
+    *   Action: Run the development server (`npm run dev`) and manually test navigation, form functionality, and the layout across devices.
+    *   Validation: Ensure all pages (Home, About Us, Services, Request a Quote, Contact Us) render correctly and responsive behavior is intact.
+    *   Reference: Frontend Guidelines Document.
+
+## Phase 3: Backend Development
+
+1.  **Setup API Route for Quote Requests**
+
+    *   Action: Create a Next.js API route at `app/api/quote/route.ts`.
+    *   Function: Handle POST requests to capture quote form submissions, calculate rates, and store the data in Supabase.
+    *   Reference: Backend Structure Document; PRD - Request a Quote.
+
+2.  **Implement Server-side Logic in Quote API**
+
+    *   Action: In `app/api/quote/route.ts`, add business logic for calculating the rate (weight * 500) and allow for admin overrides.
+    *   Reference: PRD - Request a Quote; Outline - Quote Request Functionality.
+
+3.  **Setup API for Contact Inquiries**
+
+    *   Action: Create another API route at `app/api/contact/route.ts` to process contact form submissions and forward inquiries appropriately.
+    *   Reference: Backend Structure Document; PRD - Contact Us.
+
+4.  **Configure Supabase Connection**
+
+    *   Action: In `utils/supabase/server.ts`, set up the connection to Supabase ensuring use of environment variables for sensitive data.
+    *   Security: Ensure row-level security policies are applied in Supabase.
+    *   Reference: Tech Stack - Supabase; PRD - Data Privacy and Security.
+
+5.  **Implement Admin Authentication with Clerk**
+
+    *   Action: Create an admin panel page at `app/admin/page.tsx`.
+    *   Integration: Use Clerk Auth by wrapping the page with authentication components from `components/providers/clerk-client-provider.tsx`.
+    *   Reference: Tech Stack - Clerk Auth; Q&A regarding admin panel functionality.
+
+6.  **Validate Backend APIs**
+
+    *   Action: Test the quote and contact API endpoints using tools like Postman or curl (e.g., send a POST request to `/api/quote/route.ts`).
+    *   Validation: Confirm that data is processed correctly and stored in Supabase without errors.
+    *   Reference: Backend Structure Document.
+
+## Phase 4: Integration
+
+1.  **Connect Frontend Forms to Backend APIs**
+
+    *   Action: In the respective frontend form components (e.g., `QuoteForm.tsx` and contact form on `page.tsx`), implement fetch or Axios calls to the API endpoints (`/api/quote` and `/api/contact`).
+    *   Reference: App Flow Document; Cursor Project Rules.
+
+2.  **Integrate Clerk Authentication in Frontend**
+
+    *   Action: Ensure the entire application (with priority on the admin route) is wrapped in Clerk Auth provider from `components/providers/clerk-client-provider.tsx`.
+    *   Reference: Tech Stack - Clerk Auth; Frontend Guidelines Document.
+
+3.  **Integrate Google Maps API on Contact Page**
+
+    *   Action: In `app/contact/page.tsx`, include the Google Maps script tag and initialize the map with your API key.
+    *   Reference: Q&A - Map Integration; PRD - Contact Us.
+
+4.  **Conduct End-to-End Testing of Frontend & Backend Integration**
+
+    *   Action: Navigate through the website using a browser to submit a quote and contact inquiry, verifying that the API endpoints are hit and data appears in Supabase.
+    *   Validation: Check browser console and backend logs for confirmation.
+    *   Reference: App Flow Document.
+
+## Phase 5: Deployment
+
+1.  **Configure SEO and Accessibility Settings**
+
+    *   Action: Add meta tags, structured data, ARIA roles, and proper heading hierarchies in each page (modify the `<head>` section as needed).
+    *   Reference: PRD - SEO and Accessibility; Frontend Guidelines Document.
+
+2.  **Prepare Deployment Configuration**
+
+    *   Action: Set up environment variables for production (e.g., Supabase keys, Clerk API keys, Google Maps API key) in project settings.
+    *   Reference: Tech Stack - Supabase, Clerk Auth, Google Maps API.
+
+3.  **Deploy to Vercel**
+
+    *   Action: Link your repository with Vercel and deploy the Next.js application. Ensure to specify environment variables during setup.
+    *   Note: Vercel is recommended for Next.js projects and offers native support for Next.js 14.
+    *   Reference: Deployment instructions in Cursor Project Rules.
+
+4.  **Set Up CI/CD Pipeline**
+
+    *   Action: Create a GitHub Actions workflow file (e.g., `.github/workflows/deploy.yml`) to automate testing and deployments on push to main branch.
+    *   Reference: Cursor Project Rules; Deployment section.
+
+5.  **Conduct Final Production Testing**
+
+    *   Action: Use tools such as Lighthouse and end-to-end tests to validate performance, responsiveness, and security on the production URL.
+    *   Validation: Ensure all pages load properly, API endpoints are accessible, and SEO/accessibility standards are met.
+    *   Reference: Frontend Guidelines Document; Q&A: SEO and Accessibility.
+
+6.  **Monitor and Plan for Future Enhancements**
+
+    *   Action: Document areas for future integration such as email notifications via SendGrid/Mailgun, advanced order tracking, and potential customer account features.
+    *   Reference: Q&A regarding future enhancements.
+
+This plan adheres to the specific project documents provided and integrates the starter kit structure with the selected tech stack (Next.js, Tailwind CSS, Typescript, Supabase, Shadcn UI, Clerk Auth, Open AI, and Google Maps API). Follow each step carefully to ensure that all features and integrations meet the requirements of the Global2India Website.
