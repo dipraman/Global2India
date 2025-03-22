@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/utils/supabase/server'
-import { auth } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs'
 
 // Get a specific contact inquiry by ID
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { userId } = auth()
+  const user = await currentUser()
   
   // Check if user is authenticated
-  if (!userId) {
+  if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
   

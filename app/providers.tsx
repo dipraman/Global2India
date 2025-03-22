@@ -20,10 +20,6 @@ export function Providers({ children }: { children: ReactNode }) {
         }
       }}
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-      // Special settings for development mode
-      isSatellite={isDevelopment}
-      // Trust all origins in development
-      trustOrigin={isDevelopment}
     >
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
         {children}
