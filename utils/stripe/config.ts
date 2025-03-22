@@ -1,30 +1,22 @@
-import Stripe from 'stripe';
+// Stripe service is no longer used in this application
+// This is a mock implementation to maintain compatibility with any imports
 
-// Create a conditional Stripe instance for development environment
-// In development with no API key, return a mock Stripe object
-const createStripeInstance = () => {
-  const apiKey = process.env.STRIPE_SECRET_KEY_LIVE ?? process.env.STRIPE_SECRET_KEY ?? '';
-  
-  // If we're in development and there's no API key, return a mock
-  if (!apiKey && process.env.NODE_ENV === 'development') {
-    console.log('Using mock Stripe instance in development mode');
-    // Return a mock implementation that does nothing
-    return {
-      webhooks: {
-        constructEvent: () => ({ type: 'mock.event', data: { object: {} } })
-      }
-    } as unknown as Stripe;
+interface MockStripe {
+  webhooks: {
+    constructEvent: () => { type: string; data: { object: Record<string, any> } };
+  };
+}
+
+// Create a mock Stripe interface
+export const stripe = {
+  webhooks: {
+    constructEvent: () => ({ 
+      type: 'mock.event', 
+      data: { 
+        object: {} 
+      } 
+    })
   }
-  
-  // Otherwise create a real Stripe instance
-  return new Stripe(apiKey, {
-    apiVersion: '2022-11-15', // Use a specific API version instead of null
-    appInfo: {
-      name: 'Next.js Subscription Starter',
-      version: '0.0.0',
-      url: 'https://github.com/vercel/nextjs-subscription-payments'
-    }
-  });
-};
+} as MockStripe;
 
-export const stripe = createStripeInstance();
+console.log('Using mock Stripe implementation - Stripe functionality has been disabled');
