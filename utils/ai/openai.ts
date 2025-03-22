@@ -15,6 +15,12 @@ interface GenerateCompletionArgs {
 
 type CompletionResult = string | OpenAI.Chat.Completions.ChatCompletionMessage & { reasoning_content: string };
 
+// Create a mock completion for development mode
+const createMockCompletion = (prompt: string): CompletionResult => {
+    console.log('Using mock OpenAI completion in development mode');
+    return "This is a mock AI response for development purposes. The real API will be used in production.";
+};
+
 /**
  * Generate a completion using OpenAI API
  * @param args - Configuration for the completion generation
@@ -38,8 +44,16 @@ export async function generateCompletion(args: GenerateCompletionArgs): Promise<
     } = args;
 
     const openaiKey = process.env.OPENAI_API_KEY;
+    
+    // Return a mock response in development mode if no API key is configured
     if (!openaiKey) {
-        throw new Error("OpenAI API key is not configured");
+        if (process.env.NODE_ENV === 'development') {
+            const lastMessage = chat[chat.length - 1]?.content as string || '';
+            return createMockCompletion(lastMessage);
+        } else {
+            console.error("OpenAI API key is missing in production environment");
+            throw new Error("OpenAI API key is not configured");
+        }
     }
 
     const openai = new OpenAI({ apiKey: openaiKey });

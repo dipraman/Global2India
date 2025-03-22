@@ -22,14 +22,22 @@ const relevantEvents = new Set([
 ]);
 
 export async function POST(req: Request) {
+  // Skip processing if no webhook secret is available (development scenario)
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!webhookSecret) {
+    console.log('Webhook secret not found, skipping webhook processing');
+    return new Response(JSON.stringify({ received: true, message: 'Webhook processing skipped (no secret configured)' }));
+  }
+
   const body = await req.text();
   const sig = req.headers.get('stripe-signature') as string;
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   let event: Stripe.Event;
 
   try {
-    if (!sig || !webhookSecret)
-      return new Response('Webhook secret not found.', { status: 400 });
+    if (!sig) {
+      return new Response('Stripe signature not found.', { status: 400 });
+    }
+    
     event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
     console.log(`🔔  Webhook received: ${event.type}`);
   } catch (err: any) {
