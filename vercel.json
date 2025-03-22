@@ -3,7 +3,6 @@
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "ignoreCommand": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
   "regions": ["iad1"],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
